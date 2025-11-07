@@ -26,7 +26,7 @@ export default function MetricCard({ platform, index = 0 }: MetricCardProps) {
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.4, delay: index * 0.1 }}
-      className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm hover:shadow-lg transition-all hover:-translate-y-1"
+      className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm hover:shadow-lg transition-all hover:-translate-y-1 hover-lift smooth-transition"
     >
       {/* Header con icono y nombre */}
       <div className="flex items-center gap-3 mb-4">
