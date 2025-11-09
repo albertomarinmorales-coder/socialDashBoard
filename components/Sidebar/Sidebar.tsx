@@ -107,11 +107,11 @@ export default function Sidebar() {
         <div className="p-4 border-t border-gray-200 dark:border-gray-700">
           <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 smooth-transition cursor-pointer">
             <div className="w-10 h-10 bg-linear-to-br from-pink-500 to-orange-500 rounded-full flex items-center justify-center">
-              <span className="text-white font-semibold text-sm">AM</span>
+              <span className="text-white font-semibold text-sm">JS</span>
             </div>
             <div className="flex-1">
               <p className="text-sm font-semibold text-gray-900 dark:text-white">
-                Alberto Marín
+                John Smith
               </p>
               <p className="text-xs text-gray-500 dark:text-gray-400">
                 Admin
@@ -162,11 +162,11 @@ export default function Sidebar() {
         <div className="p-4 border-t border-gray-200 dark:border-gray-700">
           <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 smooth-transition cursor-pointer">
             <div className="w-10 h-10 bg-linear-to-br from-pink-500 to-orange-500 rounded-full flex items-center justify-center">
-              <span className="text-white font-semibold text-sm">AM</span>
+              <span className="text-white font-semibold text-sm">JS</span>
             </div>
             <div className="flex-1">
               <p className="text-sm font-semibold text-gray-900 dark:text-white">
-                Alberto Marín
+                John Smith
               </p>
               <p className="text-xs text-gray-500 dark:text-gray-400">
                 Admin

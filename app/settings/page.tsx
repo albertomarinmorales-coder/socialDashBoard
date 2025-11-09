@@ -113,7 +113,7 @@ export default function SettingsPage() {
             </button>
           </div>
           <div className="flex-1">
-            <h4 className="text-xl font-bold text-gray-900 dark:text-white">Alberto Marín</h4>
+            <h4 className="text-xl font-bold text-gray-900 dark:text-white">John Smith</h4>
             <p className="text-gray-600 dark:text-gray-400">admin@socialdashboard.com</p>
             <button className="mt-2 px-4 py-2 text-sm bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors">
               Cambiar Foto
@@ -131,7 +131,7 @@ export default function SettingsPage() {
             </label>
             <input
               type="text"
-              defaultValue="Alberto"
+              defaultValue="John"
               className="w-full px-4 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all"
             />
           </div>
@@ -141,7 +141,7 @@ export default function SettingsPage() {
             </label>
             <input
               type="text"
-              defaultValue="Marín Morales"
+              defaultValue="Smith"
               className="w-full px-4 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all"
             />
           </div>
