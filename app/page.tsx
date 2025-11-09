@@ -26,17 +26,17 @@ export default function Home() {
       <TopMetrics metrics={metrics} />
       
       {/* Gráficos */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
         <LineChart />
         <BarChart />
       </div>
       
-      <div className="mb-8">
+      <div className="mb-6">
         <DoughnutChart />
       </div>
       
       {/* Tarjetas de Redes Sociales */}
-      <div className="mb-8">
+      <div>
         <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
           Plataformas Sociales
         </h2>
