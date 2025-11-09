@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Home, 
@@ -18,14 +19,14 @@ interface MenuItem {
   icon: React.ReactNode;
   label: string;
   href: string;
-  active?: boolean;
 }
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
 
   const menuItems: MenuItem[] = [
-    { icon: <Home className="w-5 h-5" />, label: 'Dashboard', href: '/', active: true },
+    { icon: <Home className="w-5 h-5" />, label: 'Dashboard', href: '/' },
     { icon: <BarChart3 className="w-5 h-5" />, label: 'Analíticas', href: '/analytics' },
     { icon: <TrendingUp className="w-5 h-5" />, label: 'Tendencias', href: '/trends' },
     { icon: <Users className="w-5 h-5" />, label: 'Audiencia', href: '/audience' },
@@ -90,7 +91,7 @@ export default function Sidebar() {
               href={item.href}
               className={`
                 flex items-center gap-3 px-4 py-3 rounded-lg smooth-transition
-                ${item.active 
+                ${pathname === item.href
                   ? 'bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400' 
                   : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
                 }
@@ -145,7 +146,7 @@ export default function Sidebar() {
               href={item.href}
               className={`
                 flex items-center gap-3 px-4 py-3 rounded-lg smooth-transition
-                ${item.active 
+                ${pathname === item.href
                   ? 'bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400' 
                   : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
                 }
