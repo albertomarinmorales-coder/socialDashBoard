@@ -1,15 +1,26 @@
 'use client';
 
-import { RefreshCw, Moon, Sun } from 'lucide-react';
+import { RefreshCw, Moon, Sun, Calendar } from 'lucide-react';
 import { useTheme } from '@/context/ThemeContext';
+import { useDashboard } from '@/context/DashboardContext';
 
 interface HeaderProps {
   onRefresh?: () => void;
   lastUpdate?: Date;
 }
 
+type TimePeriod = 'today' | '7days' | '30days' | '90days';
+
+const periodLabels: Record<TimePeriod, string> = {
+  today: 'Hoy',
+  '7days': '7 días',
+  '30days': '30 días',
+  '90days': '90 días',
+};
+
 export default function Header({ onRefresh, lastUpdate }: HeaderProps) {
   const { theme, toggleTheme } = useTheme();
+  const { timePeriod, setTimePeriod } = useDashboard();
   
   const formatTime = (date: Date) => {
     return date.toLocaleTimeString('es-ES', { 
@@ -30,9 +41,29 @@ export default function Header({ onRefresh, lastUpdate }: HeaderProps) {
           </p>
         </div>
         
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3 flex-wrap">
+          {/* Selector de período */}
+          <div className="flex items-center gap-2 bg-white dark:bg-gray-800 rounded-lg p-1 shadow-sm border border-gray-200 dark:border-gray-700">
+            <Calendar className="w-4 h-4 text-gray-500 dark:text-gray-400 ml-2" />
+            {(Object.keys(periodLabels) as TimePeriod[]).map((period) => (
+              <button
+                key={period}
+                onClick={() => setTimePeriod(period)}
+                className={`
+                  px-3 py-1.5 rounded-md text-sm font-medium transition-all
+                  ${timePeriod === period
+                    ? 'bg-indigo-600 text-white shadow-sm'
+                    : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700'
+                  }
+                `}
+              >
+                {periodLabels[period]}
+              </button>
+            ))}
+          </div>
+
           {lastUpdate && (
-            <span className="text-sm text-gray-500 dark:text-gray-400">
+            <span className="text-sm text-gray-500 dark:text-gray-400 hidden lg:inline">
               Actualizado: {formatTime(lastUpdate)}
             </span>
           )}
@@ -51,7 +82,7 @@ export default function Header({ onRefresh, lastUpdate }: HeaderProps) {
           
           <button
             onClick={onRefresh}
-            className="flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors"
+            className="flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors shadow-sm"
           >
             <RefreshCw className="w-4 h-4" />
             <span className="hidden sm:inline">Actualizar</span>

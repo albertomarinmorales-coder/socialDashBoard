@@ -1,73 +1,42 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
-import { TopMetrics, SocialPlatform } from '@/types/metrics';
-import { updateMetricsRealTime, generateRandomVariation } from '@/data/socialData';
+import { useState, useEffect } from 'react';
 
-interface UseRealTimeDataReturn {
-  metrics: TopMetrics;
-  platforms: SocialPlatform[];
-  lastUpdate: Date;
-  isUpdating: boolean;
-  forceUpdate: () => void;
-}
+/**
+ * Hook para efectos visuales de actualización en tiempo real
+ * Los datos reales ahora se gestionan en DashboardContext
+ */
+export function useRealTimeData() {
+  const [pulse, setPulse] = useState(false);
 
-export function useRealTimeData(
-  initialMetrics: TopMetrics,
-  initialPlatforms: SocialPlatform[],
-  updateInterval: number = 30000 // 30 segundos por defecto
-): UseRealTimeDataReturn {
-  const [metrics, setMetrics] = useState<TopMetrics>(initialMetrics);
-  const [platforms, setPlatforms] = useState<SocialPlatform[]>(initialPlatforms);
-  const [lastUpdate, setLastUpdate] = useState<Date>(new Date());
-  const [isUpdating, setIsUpdating] = useState(false);
-
-  const updateData = useCallback(() => {
-    setIsUpdating(true);
-
-    // Simular un pequeño delay para la animación
-    setTimeout(() => {
-      // Actualizar métricas principales
-      const updatedMetrics = updateMetricsRealTime(metrics);
-      setMetrics(updatedMetrics);
-
-      // Actualizar plataformas sociales
-      const updatedPlatforms = platforms.map(platform => ({
-        ...platform,
-        followers: generateRandomVariation(platform.followers, 0.02),
-        change24h: parseFloat((generateRandomVariation(platform.change24h * 100, 0.1) / 100).toFixed(2)),
-        engagementRate: parseFloat((generateRandomVariation(platform.engagementRate * 100, 0.05) / 100).toFixed(2)),
-        trend: [
-          ...platform.trend.slice(1),
-          generateRandomVariation(platform.trend[platform.trend.length - 1], 0.03)
-        ]
-      }));
-      setPlatforms(updatedPlatforms);
-
-      setLastUpdate(new Date());
-      setIsUpdating(false);
-    }, 300);
-  }, [metrics, platforms]);
-
-  // Actualización automática cada X segundos
+  // Efecto de pulso cada 30 segundos para indicar actualización
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      updateData();
-    }, updateInterval);
+    const interval = setInterval(() => {
+      setPulse(true);
+      setTimeout(() => setPulse(false), 1000);
+    }, 30000);
 
-    return () => clearInterval(intervalId);
-  }, [updateData, updateInterval]);
-
-  // Función para forzar actualización manual
-  const forceUpdate = useCallback(() => {
-    updateData();
-  }, [updateData]);
+    return () => clearInterval(interval);
+  }, []);
 
   return {
-    metrics,
-    platforms,
-    lastUpdate,
-    isUpdating,
-    forceUpdate,
+    pulse,
   };
+}
+
+/**
+ * Hook para simular loading de componentes pesados
+ */
+export function useDataLoading(delay: number = 500) {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, delay);
+
+    return () => clearTimeout(timer);
+  }, [delay]);
+
+  return isLoading;
 }

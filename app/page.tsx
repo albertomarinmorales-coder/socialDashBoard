@@ -8,19 +8,14 @@ import MetricCard from '@/components/Dashboard/MetricCard';
 import LineChart from '@/components/Charts/LineChart';
 import BarChart from '@/components/Charts/BarChart';
 import DoughnutChart from '@/components/Charts/DoughnutChart';
-import { topMetrics, socialPlatforms } from '@/data/socialData';
-import { useRealTimeData } from '@/hooks/useRealTimeData';
+import { useDashboard } from '@/context/DashboardContext';
 
 export default function Home() {
-  const { metrics, platforms, lastUpdate, isUpdating, forceUpdate } = useRealTimeData(
-    topMetrics,
-    socialPlatforms,
-    30000 // Actualizar cada 30 segundos
-  );
+  const { metrics, platforms, lastUpdate, isUpdating, refreshData } = useDashboard();
 
   return (
     <DashboardLayout>
-      <Header onRefresh={forceUpdate} lastUpdate={lastUpdate} />
+      <Header onRefresh={refreshData} lastUpdate={lastUpdate} />
       
       {/* Métricas Principales */}
       <TopMetrics metrics={metrics} />
